@@ -1,5 +1,6 @@
-package top.dalongm;
+package top.dalongm.sink;
 
+import org.apache.flink.api.common.typeinfo.BasicTypeInfo;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.java.io.jdbc.JDBCAppendTableSink;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -77,7 +78,7 @@ public class FlinkKafka2MySQL {
                 .setUsername("root")
                 .setPassword("root")
                 .setQuery("INSERT INTO user (user,message,timestamp) VALUES (?,?,?)")
-                .setParameterTypes(new TypeInformation[]{Types.STRING(), Types.STRING(), Types.STRING()})
+                .setParameterTypes(new TypeInformation[]{BasicTypeInfo.STRING_TYPE_INFO, BasicTypeInfo.STRING_TYPE_INFO, BasicTypeInfo.STRING_TYPE_INFO})
                 .build();
 
         // 方式1
@@ -93,7 +94,6 @@ public class FlinkKafka2MySQL {
         // 方式2
         DataStream<Row> stream = fsTableEnv.toAppendStream(user, Row.class);
         sink.emitDataStream(stream);
-
 
 
         fsEnv.execute();

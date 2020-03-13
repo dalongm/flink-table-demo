@@ -1,4 +1,4 @@
-package top.dalongm;
+package top.dalongm.env;
 
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
